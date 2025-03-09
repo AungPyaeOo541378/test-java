@@ -61,3 +61,34 @@ var btn = document.querySelector("#button");
   btn.classList.remove("btn-light");
  }
  })
+
+ //var searchbar =document.querySelector(".search-bar");
+ ///searchbar.addEventListener("keyup",function(){
+ // var servalue = searchbar.value.toLowerCase();
+ // var cards = document.querySelectorAll(".card");
+ // for(let i=0; i<cards.length; i++){
+   // var cardTitle = cards[i].querySelector("h3").innerHTML;
+   // var h3Title = cardTitle.toLowerCase();
+  //  if (h3Title.includes(servalue)){
+   //   cards[i].style.display="block";    
+   // }else{
+   //     cards[i].style.display="none";
+ //     }
+//
+//  }
+ //})
+
+
+ var searchBar = document.querySelector(".search-bar");
+ searchBar.addEventListener("keyup",function(){
+    var searchvalue = searchBar.value.toLowerCase();
+    var cards = document.querySelectorAll(".card");
+    for (let i=0; i<cards.length; i++){
+      var cardTitle = cards[i].querySelector("h3").innerHTML;
+      var h3Title = cardTitle.toLowerCase();
+      if ( h3Title.includes(searchvalue)){
+        cards[i].style.display="block";
+      }else{ cards[i].style.display="none";}
+    }
+    
+ })
