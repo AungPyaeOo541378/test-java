@@ -58,7 +58,7 @@ function productInsert(data) {
       noti.classList.add("show");
       setTimeout(() => {
         noti.classList.remove("show");
-      }, 5000);
+      }, 3000);
       var carDiv = document.querySelector("#cart-div");
       var cardHeader = document.createElement("div");
       cardHeader.classList.add("card");
@@ -111,9 +111,23 @@ cartId.addEventListener("click", function () {
     if (amount <= 1) {
       console.log("Stop");
     } else {
-      //Minus operation
+      let finalMinusPrice = "";
+      let finalMinusAmount = "";
+      //select and operate
+      let semiMPrice = document.querySelector("#semi-price").innerHTML;
+      let Mamount = document.querySelector("#product-amount").innerHTML;
+      let orgMPrice = document.querySelector("#org-price").innerHTML;
+      finalMinusAmount = Number(finalMinusAmount);
+      finalMinusPrice = Number(finalMinusPrice);
+      finalMinusAmount -= Number(1) - Number(Mamount);
+      finalMinusPrice += Number(semiMPrice) - Number(orgMPrice);
+      //Ui update
+      document.querySelector("#product-amount").innerHTML = `${finalMinusAmount}`;
+      document.querySelector("#semi-price").innerHTML = `${finalMinusPrice}`;
     }
   });
+      //Minus operation
+    
 
   plus.addEventListener("click", function () {
     //reset
