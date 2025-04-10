@@ -1,36 +1,24 @@
-var data = fetch("https://fakestoreapi.com/products");
 
-fetch("https://fakestoreapi.com/products") //step 1 fetch data api calling
-  .then((response) => response.json()) // convert json
-  .then((data) => productInsert(data)) // call function
-  .catch((error) => {
-    console.error("Error loading the products:", error);
-    document.getElementById("product-list").innerHTML =
-      "<p>Failed to load products.</p>";
-  });
-
-  function productInsert(data){
-    const productListContainer = document.querySelector("#product-list");
-    for (let i = 0; i < data.length; i++){
-      const productCard = document.createElement("div");
-      productCard.classList.add("card");
-      
-      productCard.innerHTML =  `
-
+function productInsert(data) {
+    const productListContainer = document.querySelector("#product-list"); // step 1 select from html with id
+    for (let i = 0; i < data.length; i++) {
+      const productCard = document.createElement("div"); // inject div to html
+      productCard.classList.add("card"); // add class to div
+  
+      productCard.innerHTML = `
       <h5>${data[i].id}</h5>
       <img class="img-size"  src="${data[i].image}">
       <h3 class="text-break text-overflow">${data[i].title}</h3>
       <p>price : ${data[i].price} yen</p>
       <button data-bs-toggle="modal" data-bs-target="#exampleModal${data[i].id}" style="cursor: pointer; " class="btn btn-warning"> See Detail</button>
-      <button style="cursor: pointer; " class="btn btn-warning mt-3 cart-btn" 
+    <button style="cursor: pointer; " class="btn btn-warning mt-3 cart-btn" 
       data-id="${data[i].id}"
       data-title="${data[i].title}" 
       data-price="${data[i].price}" 
       data-img="${data[i].image}">
       Add to Cart
-      </button>
-
-        
+     </button>
+  
   <!-- Modal -->
   <div class="modal fade" id="exampleModal${data[i].id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -52,7 +40,7 @@ fetch("https://fakestoreapi.com/products") //step 1 fetch data api calling
       `;
       productListContainer.appendChild(productCard);
     }
-
+  
     var cartBtn = document.querySelectorAll(".cart-btn");
     var noti = document.querySelector("#noti");
     for (let i = 0; i < cartBtn.length; i++) {
@@ -102,7 +90,6 @@ fetch("https://fakestoreapi.com/products") //step 1 fetch data api calling
       });
     }
   }
-
   var cartId = document.querySelector("#cart-id");
   
   cartId.addEventListener("click", function () {
@@ -150,32 +137,35 @@ fetch("https://fakestoreapi.com/products") //step 1 fetch data api calling
     });
   });
   
-
-//$("#color-btn").click(function(){
-//$("#main-body").toggleClass("bg-color");
-//});
-
-var bgBtn = document.querySelector("#color-btn");
-bgBtn.addEventListener("click",function(){
-    
+  var btn = document.querySelector("#button");
+  btn.addEventListener("click", function () {
+    var body = document.querySelector("#main-body");
+    var hello = document.querySelector("#hello");
+    body.classList.toggle("dark-mode");
+    hello.classList.toggle("hello");
   
-  var mainbody = document.querySelector("#main-body");
-  var hello = document.querySelector("#hello");
-  mainbody.classList.toggle("bg-color");
-if (mainbody.classList.contains("bg-color")){
-  bgBtn.classList.remove("btn-dark");
-  bgBtn.classList.add("btn-light");
-  hello.classList.add("hello");
-  document.querySelector("#color-btn").innerHTML =  `Light Mode`;
-}
-else{
-  bgBtn.classList.remove("btn-light");
-  bgBtn.classList.add("btn-dark");
-  hello.classList.remove("hello");
-  document.querySelector("#color-btn").innerHTML =  `Dark Mode`;
-
-}
-
-});
-
-
+    if (body.classList.contains("dark-mode")) {
+      btn.classList.remove("btn-success");
+      btn.classList.add("btn-light");
+    } else {
+      btn.classList.add("btn-success");
+      btn.classList.remove("btn-light");
+    }
+  });
+  
+  var searchBar = document.querySelector(".search-bar");
+  searchBar.addEventListener("keyup", function () {
+    var searchvalue = searchBar.value.toLowerCase();
+    var cards = document.querySelectorAll(".card");
+    ``;
+    for (let i = 0; i < cards.length; i++) {
+      var cardTitle = cards[i].querySelector("h3").innerHTML;
+      var h3Title = cardTitle.toLowerCase();
+      if (h3Title.includes(searchvalue)) {
+        cards[i].style.display = "block";
+      } else {
+        cards[i].style.display = "none";
+      }
+    }
+  });
+  

@@ -37,8 +37,8 @@
   height: 300px !important;
   object-fit: contain !important;
 }
-.dark-mode {
-  background-color: rgb(59, 59, 59);
+.bg-color {
+  background-color: rgb(56, 56, 56);
 }
 .hello {
   color: rgb(237, 246, 255);
