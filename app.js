@@ -74,26 +74,30 @@ fetch("https://fakestoreapi.com/products") //step 1 fetch data api calling
                         alt="...">
                 </div>
                 <div class="col-md-12">
-                    <div class="card-body">
+                    <div class="card-body ">
                         <p class="card-title">
                            ${cartBtn[i].getAttribute("data-title")}
                         </p>
+                         <div class="root-price">
                         <p class="card-text">price : 
-                        <span id="org-price">
+                        <span class="org-price">
                         ${cartBtn[i].getAttribute("data-price")}
                         </span>
                         </p>
                          <p class="card-text" >semi-price : 
-                          <span id="semi-price">${cartBtn[i].getAttribute(
+                        
+                          <span class="semi-price">${cartBtn[i].getAttribute(
                             "data-price"
                           )}
                           </span>
+                         
                          </p>
-                         <div class="d-flex justify-content-center gap-5 align-items-center ">
-                            <p id="minus" style="cursor:pointer;font-size:1.5rem"> - </p>
-                            <p id="product-amount"> 1 </p>
-                            <p id="plus" style="cursor:pointer;font-size:1.5rem"> + </p>
+                         <div class="d-flex justify-content-center gap-5 align-items-center root-plus-minus">
+                            <p class="minus" style="cursor:pointer;font-size:1.5rem"> - </p>
+                            <p class="product-amount"> 1 </p>
+                            <p class="plus" style="cursor:pointer;font-size:1.5rem"> + </p>
                          </div>
+                          </div>
                     </div>
                 </div>
               </div>
@@ -103,79 +107,127 @@ fetch("https://fakestoreapi.com/products") //step 1 fetch data api calling
     }
   }
 
-  var cartId = document.querySelector("#cart-id");
-  
-  cartId.addEventListener("click", function () {
-    var plus = document.querySelector("#plus");
-    var minus = document.querySelector("#minus");
-  
-    minus.addEventListener("click", function () {
-      let amount = document.querySelector("#product-amount").innerHTML;
-      if (amount <= 1) {
-        console.log("Stop");
-      } else {
-        let finalMinusPrice = "";
-        let finalMinusAmount = "";
-        //select and operate
-        let semiMPrice = document.querySelector("#semi-price").innerHTML;
-        let Mamount = document.querySelector("#product-amount").innerHTML;
-        let orgMPrice = document.querySelector("#org-price").innerHTML;
-        finalMinusAmount = Number(finalMinusAmount);
-        finalMinusPrice = Number(finalMinusPrice);
-        finalMinusAmount -= Number(1) - Number(Mamount);
-        finalMinusPrice += Number(semiMPrice) - Number(orgMPrice);
-        //Ui update
-        document.querySelector("#product-amount").innerHTML = `${finalMinusAmount}`;
-        document.querySelector("#semi-price").innerHTML = `${finalMinusPrice}`;
-      }
-    });
-        //Minus operation
-      
-  
-    plus.addEventListener("click", function () {
-      //reset
-      let finalPrice = "";
+
+  $("#cart-id").click(function(){
+    let finalPrice = "";
       let finalAmount = "";
-      //select and operate
-      let semiPrice = document.querySelector("#semi-price").innerHTML;
-      let amount = document.querySelector("#product-amount").innerHTML;
-      let orgPrice = document.querySelector("#org-price").innerHTML;
-      finalAmount = Number(finalAmount);
-      finalPrice = Number(finalPrice);
-      finalAmount += Number(amount) + Number(1);
-      finalPrice += Number(orgPrice) + Number(semiPrice);
-      //Ui update
-      document.querySelector("#product-amount").innerHTML = `${finalAmount}`;
-      document.querySelector("#semi-price").innerHTML = `${finalPrice}`;
-    });
+
+     $(".plus").click(function() {
+        let count = $(this)
+        .closest(".root-plus-minus")
+        .find(".product-amount")
+        .text();
+        let price = $(this)
+        .closest(".root-price")
+        .find(".semi-price")
+        .text();
+      
+      let originalPrice = $(this)
+      .closest(".root-price")
+      .find(".org-price")
+      .text();
+      finalPrice = Number(price)+Number(originalPrice);
+      finalAmount= Number(count)+Number(1);
+      $(this)
+      .closest(".root-plus-minus")
+        .find(".product-amount")
+        .text(finalAmount);
+
+        $(this)
+        .closest(".root-price")
+        .find(".semi-price")
+        .text(finalPrice);
+      });
+      
+      
+//Minus operation
+    $(".minus").click(function() {
+      if(finalAmount <=1){
+        alert("The Product Amount is Zero;")
+        
+      }else
+      { let count = $(this)
+        .closest(".root-plus-minus")
+        .find(".product-amount")
+        .text();
+        let price = $(this)
+        .closest(".root-price")
+        .find(".semi-price")
+        .text();
+      
+        let originalPrice = $(this)
+        .closest(".root-price")
+        .find(".org-price")
+        .text();
+
+        finalPrice = Number(price)-Number(originalPrice);
+        finalAmount= Number(count)-Number(1);
+        $(this)
+        .closest(".root-plus-minus")
+        .find(".product-amount")
+        .text(finalAmount);};
+
+
+        $(this)
+        .closest(".root-price")
+        .find(".semi-price")
+        .text(finalPrice);
+
+
+     });
+    
   });
   
+  //price//
+ 
+      
 
-//$("#color-btn").click(function(){
-//$("#main-body").toggleClass("bg-color");
-//});
+$("#color-btn").click(function(){
+$("#main-body").toggleClass("bg-color");
+if ($("#main-body").contains("bg-color")){
+  $("mainbody").text("Dark Mode")
+}else{
+  $("mainbody").text("Light Mode")
+};
+});
 
-var bgBtn = document.querySelector("#color-btn");
-bgBtn.addEventListener("click",function(){
+// var bgBtn = document.querySelector("#color-btn");
+// bgBtn.addEventListener("click",function(){
     
   
-  var mainbody = document.querySelector("#main-body");
-  var hello = document.querySelector("#hello");
-  mainbody.classList.toggle("bg-color");
-if (mainbody.classList.contains("bg-color")){
-  bgBtn.classList.remove("btn-dark");
-  bgBtn.classList.add("btn-light");
-  hello.classList.add("hello");
-  document.querySelector("#color-btn").innerHTML =  `Light Mode`;
-}
-else{
-  bgBtn.classList.remove("btn-light");
-  bgBtn.classList.add("btn-dark");
-  hello.classList.remove("hello");
-  document.querySelector("#color-btn").innerHTML =  `Dark Mode`;
+//   var mainbody = document.querySelector("#main-body");
+//   var hello = document.querySelector("#hello");
+//   mainbody.classList.toggle("bg-color");
+// if (mainbody.classList.contains("bg-color")){
+//   bgBtn.classList.remove("btn-dark");
+//   bgBtn.classList.add("btn-light");
+//   hello.classList.add("hello");
+//   document.querySelector("#color-btn").innerHTML =  `Light Mode`;
+// }
+// else{
+//   bgBtn.classList.remove("btn-light");
+//   bgBtn.classList.add("btn-dark");
+//   hello.classList.remove("hello");
+//   document.querySelector("#color-btn").innerHTML =  `Dark Mode`;
 
-}
+// }
 
+// });
+
+var searchBar = document.querySelector(".search-bar");
+searchBar.addEventListener("keyup", function () {
+  var searchvalue = searchBar.value.toLowerCase();
+  var cards = document.querySelectorAll(".card");
+  ``;
+  for (let i = 0; i < cards.length; i++) {
+    var cardTitle = cards[i].querySelector("h3").innerHTML;
+    var h3Title = cardTitle.toLowerCase();
+    if (h3Title.includes(searchvalue)) {
+      cards[i].style.display = "block";
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
 });
 
 
