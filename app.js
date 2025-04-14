@@ -182,14 +182,14 @@ fetch("https://fakestoreapi.com/products") //step 1 fetch data api calling
  
       
 
-$("#color-btn").click(function(){
-$("#main-body").toggleClass("bg-color");
-if ($("#main-body").contains("bg-color")){
-  $("mainbody").text("Dark Mode")
-}else{
-  $("mainbody").text("Light Mode")
-};
-});
+// $("#color-btn").click(function(){
+// $("#main-body").toggleClass("bg-color");
+// if ($("#main-body").contains("bg-color")){
+//   $("mainbody").text("Dark Mode")
+// }else{
+//   $("mainbody").text("Light Mode")
+// };
+// });
 
 // var bgBtn = document.querySelector("#color-btn");
 // bgBtn.addEventListener("click",function(){
@@ -214,19 +214,33 @@ if ($("#main-body").contains("bg-color")){
 
 // });
 
-var searchBar = document.querySelector(".search-bar");
-searchBar.addEventListener("keyup", function () {
-  var searchvalue = searchBar.value.toLowerCase();
-  var cards = document.querySelectorAll(".card");
-  ``;
-  for (let i = 0; i < cards.length; i++) {
-    var cardTitle = cards[i].querySelector("h3").innerHTML;
-    var h3Title = cardTitle.toLowerCase();
-    if (h3Title.includes(searchvalue)) {
-      cards[i].style.display = "block";
-    } else {
-      cards[i].style.display = "none";
-    }
+// var searchBar = document.querySelector(".search-bar");
+// searchBar.addEventListener("keyup", function () {
+//   var searchvalue = searchBar.value.toLowerCase();
+//   var cards = document.querySelectorAll(".card");
+//   ``;
+//   for (let i = 0; i < cards.length; i++) {
+//     var cardTitle = cards[i].querySelector("h3").innerHTML;
+//     var h3Title = cardTitle.toLowerCase();
+//     if (h3Title.includes(searchvalue)) {
+//       cards[i].style.display = "block";
+//     } else {
+//       cards[i].style.display = "none";
+//     }
+//   }
+// });
+
+$("#color-btn").click(function () {
+  $("#main-body").toggleClass("bg-color");
+
+  if ($(this).text() == "Light Mode") {
+    $(this).text("Dark Mode");
+    return;
+  }
+
+  if ($(this).text() == "Dark Mode") {
+    $(this).text("Light Mode");
+    return;
   }
 });
 
