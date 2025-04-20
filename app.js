@@ -66,7 +66,7 @@ fetch("https://fakestoreapi.com/products") //step 1 fetch data api calling
         cardHeader.classList.add("card");
         cardHeader.classList.add("mb-3");
         cardHeader.innerHTML = `
-          <div class="row g-0">
+          <div class="row g-0" >
                 <div class="col-md-12">
                     <img
                         src="${cartBtn[i].getAttribute("data-img")}"
